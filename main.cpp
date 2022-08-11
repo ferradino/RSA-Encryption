@@ -151,7 +151,7 @@ uint64_t modExp(uint64_t base,uint64_t exp,uint64_t mod) {
         }
         // square the base
         base = (base * base) % mod;
-        // divide exp by 2... shift the bits to the right 1 place
+        // divide exp by 2... shift the bits to the right by 1 place
         exp /= 2;
     }
     
