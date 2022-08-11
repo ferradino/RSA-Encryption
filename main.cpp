@@ -36,6 +36,7 @@ bool isPrime(int64_t n) {
             return false;
 
     return true;
+        
 }
 
 
@@ -66,6 +67,7 @@ int64_t gcd(int64_t a,int64_t b) {
     }
 
     return a;
+
 }
 
 
@@ -114,6 +116,7 @@ int64_t modInverse(int64_t a,int64_t n) {
         t += n;
 
     return t;
+
 }
 
 
@@ -137,19 +140,22 @@ int64_t modInverse(int64_t a,int64_t n) {
 
 uint64_t modExp(uint64_t base,uint64_t exp,uint64_t mod) {
 
-    uint64_t modExp;
+    uint64_t 
+        ans = 1;
 
-    if (exp == 0) {
-        base = 1;
-    } else {
-        for (int i = 0; i < exp; i++) {
-            base *= base;
+    // loop while exp not 0
+    while (exp != 0) {
+        // if exp is odd, base is a factor
+        if (exp % 2 == 1) {
+            ans = (ans * base) % mod;
         }
+        // square the base
+        base = (base * base) % mod;
+        // divide exp by 2... shift the bits to the right 1 place
+        exp /= 2;
     }
-
-    modExp = base % mod;
     
-    return modExp;
+    return ans;
 
 }
 
@@ -173,6 +179,7 @@ int64_t getFileSize(char *fn) {
                             // directly to the operating system
 
     return fs.st_size;
+
 }
 
 //-----------------------------------------------------------------------------
@@ -219,8 +226,10 @@ void keyGen() {
     d = modInverse(e,f);
 
     // step 6: output n,e as public key, output n,d as private key
-    cout << "Public key: " << n << ',' << e << endl;
-    cout << "Private key: " << n << ',' << d << endl;
+    cout << "Public key: " << n << ' ' << e << endl;
+    cout << "Private key: " << n << ' ' << d << endl;
+    // cout << "F = " << f << '\t' << "Q = " << q << '\t' << "P = " << p << endl;
+
 }
 
 
